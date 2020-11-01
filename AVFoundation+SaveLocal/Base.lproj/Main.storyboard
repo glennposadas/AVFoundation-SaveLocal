@@ -15,20 +15,51 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAVED VIDEO:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVu-14-Rg7">
+                                <rect key="frame" x="16" y="128" width="382" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2d3-t3-Qi4">
+                                <rect key="frame" x="0.0" y="165" width="414" height="350"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="ERf-24-HWG"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2d3-t3-Qi4" firstAttribute="top" secondItem="AVu-14-Rg7" secondAttribute="bottom" constant="16" id="I9z-0N-n3w"/>
+                            <constraint firstItem="AVu-14-Rg7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="L10-KD-9ir"/>
+                            <constraint firstItem="2d3-t3-Qi4" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="W2B-wJ-hIU"/>
+                            <constraint firstItem="AVu-14-Rg7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="ohA-tw-tnI"/>
+                            <constraint firstItem="2d3-t3-Qi4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="sOw-0h-5ZX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="AVu-14-Rg7" secondAttribute="trailing" constant="16" id="z7g-pR-e06"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2Nw-lN-EBs">
+                        <barButtonItem key="leftBarButtonItem" title="LOAD SAVED VIDEO" id="Biv-nY-Ulg">
+                            <connections>
+                                <action selector="loadSavedVideo:" destination="BYZ-38-t0r" id="QhM-zJ-mdB"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="SELECT VIDEO" id="RSi-QI-dDq">
                             <connections>
                                 <action selector="selectVideo:" destination="BYZ-38-t0r" id="yWN-cm-uET"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="containerView" destination="2d3-t3-Qi4" id="mcb-hZ-TF7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="914" y="115"/>
+            <point key="canvasLocation" x="913.04347826086962" y="114.50892857142857"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8Qi-Dy-5tM">
