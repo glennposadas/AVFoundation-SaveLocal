@@ -47,23 +47,34 @@ class ViewController: UIViewController {
     /// The method from the SO question (but a bit modified):
     /// https://stackoverflow.com/questions/64630868/swift-error-while-saving-video-data-from-url
     private func saveVideo(_ url: URL) -> Void {
-        let homeDirectory = URL.init(fileURLWithPath: NSHomeDirectory(), isDirectory: true)
-        let fileUrl = homeDirectory.appendingPathComponent("someAdId")
-            .appendingPathComponent("video-clip")
-            .appendingPathComponent(UUID.init().uuidString, isDirectory: false)
-            .appendingPathExtension("mov")
+        let fileUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            .first!
+            .appendingPathComponent("\(UUID.init().uuidString).mp4")
         
         self.savedURL = fileUrl
         print("SAVED URL: \(String(describing: self.savedURL))")
         
-        do {
-            let data = try Data(contentsOf: url)
-            try data.write(to: fileUrl, options: .atomicWrite)
-            print("✅✅✅✅")
-        } catch {
-            print("error saving video: \(error.localizedDescription)")
+        DispatchQueue.global(qos: .background).async {
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            
+            let session = URLSession.shared
+            
+            session.dataTask(with: request, completionHandler: { (data, response, error) in
+                DispatchQueue.main.async {
+                    print("response: \(String(describing: response)) | error: \(String(describing: error)) | data is nil? \(data == nil)")
+                    print("Save to: \(fileUrl.path)")
+                    if let data = data {
+                        do {
+                            try data.write(to: fileUrl, options: Data.WritingOptions.atomic)
+                            print("✅✅✅✅")
+                        } catch {
+                            print("error saving video: \(error.localizedDescription)")
+                        }
+                    }
+                }
+            }).resume()
         }
-        
     }
     
     @IBAction func loadSavedVideo(_ sender: UIBarButtonItem) {
@@ -80,6 +91,7 @@ class ViewController: UIViewController {
 
 extension ViewController: ImagePickerDelegate {
     func didSelect(videoData: Data, videoURL: URL) {
+        print("didSelect Video")
         self.saveVideo(videoURL)
     }
 }
