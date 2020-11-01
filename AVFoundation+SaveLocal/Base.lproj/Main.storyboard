@@ -23,10 +23,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2d3-t3-Qi4">
-                                <rect key="frame" x="0.0" y="165" width="414" height="350"/>
+                                <rect key="frame" x="0.0" y="165" width="414" height="250"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="350" id="ERf-24-HWG"/>
+                                    <constraint firstAttribute="height" constant="250" id="ERf-24-HWG"/>
                                 </constraints>
                             </view>
                         </subviews>
