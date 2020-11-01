@@ -54,10 +54,12 @@ class ViewController: UIViewController {
             .appendingPathExtension("mov")
         
         self.savedURL = fileUrl
+        print("SAVED URL: \(String(describing: self.savedURL))")
         
         do {
             let data = try Data(contentsOf: url)
             try data.write(to: fileUrl, options: .atomicWrite)
+            print("✅✅✅✅")
         } catch {
             print("error saving video: \(error.localizedDescription)")
         }
@@ -78,7 +80,7 @@ class ViewController: UIViewController {
 
 extension ViewController: ImagePickerDelegate {
     func didSelect(videoData: Data, videoURL: URL) {
-        
+        self.saveVideo(videoURL)
     }
 }
 
