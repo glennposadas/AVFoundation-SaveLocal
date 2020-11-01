@@ -25,14 +25,13 @@ class ViewController: UIViewController {
     }
     
     private func loadSavedVideo() {
-        let videoURL = URL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
+        let videoURL = URL(string: "video url here...")
         
         if self.player == nil {
             self.player = AVPlayer(url: videoURL!)
             let playerLayer = AVPlayerLayer(player: self.player)
-            self.containerView.frame = self.containerView.frame
+            playerLayer.frame = self.containerView.frame
             self.containerView.layer.addSublayer(playerLayer)
-            self.player.play()
         }
         
         self.player.play()
