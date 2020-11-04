@@ -32,10 +32,17 @@ class ViewController: UIViewController {
     }
     
     private func loadSavedVideo() {
-        guard let videoURL = self.savedURL else { return }
+        if self.savedURL == nil {
+            // Get the fileName from the userDefaults or from your db.
+            let fileName = UserDefaults.standard.string(forKey: "fileName") ?? ""
+            let fileUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+                .first!
+                .appendingPathComponent(fileName)
+            self.savedURL = fileUrl
+        }
         
         if self.player == nil {
-            self.player = AVPlayer(url: videoURL)
+            self.player = AVPlayer(url: self.savedURL!)
             let playerLayer = AVPlayerLayer(player: self.player)
             playerLayer.frame = self.containerView.frame
             self.containerView.layer.addSublayer(playerLayer)
@@ -47,9 +54,12 @@ class ViewController: UIViewController {
     /// The method from the SO question (but a bit modified):
     /// https://stackoverflow.com/questions/64630868/swift-error-while-saving-video-data-from-url
     private func saveVideo(_ url: URL) -> Void {
+        let fileName = "\(UUID.init().uuidString).mp4"
         let fileUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             .first!
-            .appendingPathComponent("\(UUID.init().uuidString).mp4")
+            .appendingPathComponent(fileName)
+        
+        UserDefaults.standard.set(fileName, forKey: "fileName")
         
         self.savedURL = fileUrl
         print("SAVED URL: \(String(describing: self.savedURL))")
